@@ -1,0 +1,4 @@
+*.log
+*.txt
+.vscode
+Client_run.py
