@@ -239,8 +239,13 @@ async def nighttimeset(ctx):
 
 @bot.command()
 async def 게임시작(ctx):
-    person_num = len(ctx.author.voice.channel.members)
-    print(ctx.author.voice.channel.members)
+    print(list(ctx.author.voice.channel.voice_states))
+    person_list_first = list(ctx.author.voice.channel.voice_states)
+    person_list = []
+    for i in person_list_first:
+        person_list.append(await ctx.guild.fetch_member(int(i)))
+    print(person_list)
+    person_num = len(person_list)
     job_list = ["마피아","경찰","의사"]
     job_list.append(random.choice(job_list_mafia))
     if(person_num >= 9):
@@ -263,7 +268,7 @@ async def 게임시작(ctx):
     person_job = []
     for i in range(person_num):
         person_job.append([])
-        person_job[i].append(ctx.author.voice.channel.members[i])
+        person_job[i].append(person_list[i])
         person_job[i].append(job_list[i])
     print(person_job)
     print(job_list)
